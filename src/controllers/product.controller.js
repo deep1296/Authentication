@@ -6,6 +6,17 @@ const authorise = require("../middleware/authorazition") // chnage
 
 const router = express.Router();
 
+
+router.get("/",  async (req, res) => {
+  try {
+    const products = await Product.find().lean().exec();
+    res.status(200).send(products);
+  }
+  catch (err) {
+    res.status(500).send(err);
+  }
+})
+
 router.post("/", authenticate, async (req, res) => {
   //console.log(req.user);
   try {
