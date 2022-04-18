@@ -6,7 +6,7 @@ const verifyToken = (token) => {
 
     return new Promise((resolve, reject) =>{
         
-        jwt.verify(token, "deepaktange",(err,user) =>{
+        jwt.verify(token,process.env.JWT_SECRET_KEY,(err,user) =>{
 
             if(err) return reject(err);
 
