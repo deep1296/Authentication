@@ -8,6 +8,13 @@ const classController = require("./controllers/class.controller");
 
 const PORT = process.env.PORT || 1212;
 const app = express();
+app.all('*', function(req, res, next) {
+  var origin = req.get('origin'); 
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 app.use(express.json());
 
