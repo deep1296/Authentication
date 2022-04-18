@@ -1,11 +1,12 @@
 const express = require("express");
 const connect = require("./configs/db");
 require("dotenv").config();
-const PORT = process.env.PORT || 1212;
-const app = express();
 const { register, login } = require("./controllers/auth.controller");
 const { body, validationResult } = require("express-validator");
 const productController = require("./controllers/product.controller");
+
+const PORT = process.env.PORT || 1212;
+const app = express();
 
 app.use(express.json());
 // app.use("/users", userController);
