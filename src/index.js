@@ -3,14 +3,17 @@ const connect = require("./configs/db");
 require("dotenv").config();
 const { register, login } = require("./controllers/auth.controller");
 const { body, validationResult } = require("express-validator");
-const productController = require("./controllers/product.controller");
+const teacherController = require("./controllers/teacher.controller");
+const classController = require("./controllers/class.controller");
 
 const PORT = process.env.PORT || 1212;
 const app = express();
 
 app.use(express.json());
-// app.use("/users", userController);
-app.use("/products", productController);
+
+app.use("/teachers", teacherController);
+app.use("/classes", classController);
+
 app.post(
   "/register",
   body("name").notEmpty().withMessage("Please Provide Valid first name"),

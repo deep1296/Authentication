@@ -1,15 +1,14 @@
 module.exports = function (permittedRoles) {
     return function (req, res, next) {
-      // first get the user from the req
+     
       const user = req.user;
   
-      // check if user has any of the permittedRoles
+      
       let isPermitted = false;
-      //   ["seller", "admin"]
+      
       permittedRoles.map((role) => {
-        // seller
-        // [ "customer" ]
-        if (user.role.includes(role)) {
+        
+        if (user.roles.includes(role)) {
           isPermitted = true;
         }
       });
