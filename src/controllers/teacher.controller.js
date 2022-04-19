@@ -39,4 +39,15 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+router.get("/sort" , async (req, res) => {
+    try{
+        const teachers = await Teacher.find()
+        .sort({age:-1})
+        .populate("class_id").lean().exec();
+    }
+    catch(err){
+        res.status(500).send(err.message);   
+    }
+})
+
 module.exports = router;
