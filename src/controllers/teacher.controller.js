@@ -28,6 +28,35 @@ router.get("/", async (req, res) => {
     }
 })
 
+
+
+router.get("/sort" , async (req, res) => {
+    console.log(req.query);
+    try{
+        const teachers = await Teacher.find()
+        .sort({age:req.query.value})
+        .populate("class_id")
+        .lean().exec();
+        res.status(200).send(teachers);
+    }
+    catch(err){
+        res.status(500).send(err.message);   
+    }
+})
+
+router.get("/search",async (req, res) => {
+    try{
+        const teachers = await Teacher.find({name:req.query.value})
+        .populate("class_id")
+        .lean().exec();
+        res.status(200).send(teachers);
+        
+    }
+    catch(err){
+        res.status(500).send(err.message);   
+    }
+})
+
 router.get("/:id", async (req, res) => {
     try {
         const teacher = await Teacher.findById(req.params.id).populate("class_id").lean().exec();
@@ -39,16 +68,5 @@ router.get("/:id", async (req, res) => {
     }
 })
 
-router.get("/sort" , async (req, res) => {
-    try{
-        const teachers = await Teacher.find()
-        // .sort({age:-1})
-        .populate("class_id").lean().exec();
-        res.status(200).send(teachers);
-    }
-    catch(err){
-        res.status(500).send(err.message);   
-    }
-})
 
 module.exports = router;
