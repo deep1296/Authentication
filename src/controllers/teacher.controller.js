@@ -42,7 +42,7 @@ router.get("/:id", async (req, res) => {
 router.get("/sort" , async (req, res) => {
     try{
         const teachers = await Teacher.find()
-        .sort({age:-1})
+        // .sort({age:-1})
         .populate("class_id").lean().exec();
         res.status(200).send(teachers);
     }
