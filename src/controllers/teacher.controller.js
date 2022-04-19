@@ -44,6 +44,7 @@ router.get("/sort" , async (req, res) => {
         const teachers = await Teacher.find()
         .sort({age:-1})
         .populate("class_id").lean().exec();
+        res.status(200).send(teachers);
     }
     catch(err){
         res.status(500).send(err.message);   
