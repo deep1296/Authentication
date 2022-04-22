@@ -1,6 +1,7 @@
 const express = require("express");
 const connect = require("./configs/db");
 require("dotenv").config();
+const cors = require("cors");
 const { register, login } = require("./controllers/auth.controller");
 const { body, validationResult } = require("express-validator");
 const teacherController = require("./controllers/teacher.controller");
@@ -15,7 +16,7 @@ app.all('*', function(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
-
+app.use(cors())
 app.use(express.json());
 
 app.use("/teachers", teacherController);
